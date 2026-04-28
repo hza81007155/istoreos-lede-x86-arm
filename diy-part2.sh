@@ -69,6 +69,10 @@ git clone --depth=1 -b master https://github.com/rufengsuixing/luci-app-adguardh
 git clone --depth=1 --single-branch https://github.com/hza81007155/luci-app-cpufreq.git
 
 # istore
-git clone --depth=1 -b main https://github.com/linkease/nas-packages-luci package/nas-packages-luci
-git clone --depth=1 -b master https://github.com/linkease/nas-packages package/nas-packages
-git clone --depth=1 -b main https://github.com/linkease/istore package/istore
+#git clone --depth=1 -b main https://github.com/linkease/nas-packages-luci package/nas-packages-luci
+#git clone --depth=1 -b master https://github.com/linkease/nas-packages package/nas-packages
+#git clone --depth=1 -b main https://github.com/linkease/istore package/istore
+git clone https://github.com/linkease/istore-ui.git package/istore/istore-ui
+git clone https://github.com/linkease/istore.git package/istore/istore
+git clone https://github.com/linkease/nas-packages.git package/nas
+git clone https://github.com/linkease/nas-packages-luci.git package/luci-app-nas
