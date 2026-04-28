@@ -61,6 +61,12 @@ git clone --depth=1 -b main https://github.com/Openwrt-Passwall/openwrt-passwall
 git clone https://github.com/sirpdboy/luci-app-taskplan package/luci-app-taskplan
 git clone https://github.com/miaoermua/luci-app-leigod-acc package/luci-app-leigod-acc
 
+# adguardHome
+git clone --depth=1 -b master https://github.com/rufengsuixing/luci-app-adguardhome.git
+
+# cpufreq
+git clone --depth=1 --single-branch https://github.com/hza81007155/luci-app-cpufreq.git
+
 # istore
 git clone --depth=1 -b main https://github.com/linkease/nas-packages-luci package/nas-packages-luci
 git clone --depth=1 -b master https://github.com/linkease/nas-packages package/nas-packages
