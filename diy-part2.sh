@@ -50,6 +50,7 @@ function git_sparse_clone() {
 }
 
 # 添加插件
+git clone https://github.com/pengcong226/luci-app-easy-mwan3.git
 git_sparse_clone openwrt-24.10 https://github.com/openwrt/packages utils/coremark
 git clone https://github.com/jerrykuku/luci-app-argon-config.git package/luci-app-argon-config
 git clone https://github.com/sirpdboy/luci-app-lucky.git package/lucky
