@@ -31,9 +31,6 @@ rm -rf feeds/packages/net/ksmbd
 ./scripts/feeds uninstall ksmbd
 ./scripts/feeds install ksmbd
 
-# 设置默认主题
-sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-light/Makefile
-
 # x86 型号只显示 CPU 型号
 sed -i 's/${g}.*/${a}${b}${c}${d}${e}${f}${hydrid}/g' package/lean/autocore/files/x86/autocore
 
@@ -77,10 +74,12 @@ git clone https://github.com/linkease/istore.git package/istore/istore
 git clone https://github.com/linkease/nas-packages.git package/nas
 git clone https://github.com/linkease/nas-packages-luci.git package/luci-app-nas
 
+# 设置默认主题
+sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-light/Makefile
 
 # Argone theme
-git clone --depth=1 -b 18.06 https://github.com/hza81007155/luci-theme-argone package/luci-theme-argon
-git clone --depth=1 -b 18.06 https://github.com/hza81007155/luci-app-argone-config.git package/luci-app-argon-config
+git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git luci-theme-argon
+git clone -b 18.06 https://github.com/jerrykuku/luci-app-argon-config.git luci-app-argon-config
 
 # openclash
 git clone --depth=1 -b master https://github.com/vernesong/OpenClash package/luci-app-openclash
