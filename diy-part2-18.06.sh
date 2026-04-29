@@ -54,9 +54,7 @@ function git_sparse_clone() {
 
 # 添加插件
 git_sparse_clone openwrt-24.10 https://github.com/openwrt/packages utils/coremark
-#git clone https://github.com/jerrykuku/luci-app-argon-config.git package/luci-app-argon-config
 git clone https://github.com/sirpdboy/luci-app-lucky.git package/lucky
-#git clone --depth=1 -b master https://github.com/hza81007155/luci-theme-argon package/luci-theme-argon
 git clone --depth=1 -b master https://github.com/vernesong/OpenClash package/luci-app-openclash
 git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages package/openwrt-passwall
 git clone --depth=1 -b main https://github.com/Openwrt-Passwall/openwrt-passwall package/luci-app-passwall
@@ -81,8 +79,8 @@ git clone https://github.com/linkease/nas-packages-luci.git package/luci-app-nas
 
 
 # Argone theme
-git clone --depth=1 -b main https://github.com/hza81007155/luci-theme-argone package/luci-theme-argon
-git clone --depth=1 -b main https://github.com/hza81007155/luci-app-argone-config.git package/luci-app-argon-config
+git clone --depth=1 -b 18.06 https://github.com/hza81007155/luci-theme-argone package/luci-theme-argon
+git clone --depth=1 -b 18.06 https://github.com/hza81007155/luci-app-argone-config.git package/luci-app-argon-config
 
 # openclash
 git clone --depth=1 -b master https://github.com/vernesong/OpenClash package/luci-app-openclash
