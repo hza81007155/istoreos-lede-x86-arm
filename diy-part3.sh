@@ -20,38 +20,16 @@ rm -rf feeds/luci/applications/luci-app-passwall
 rm -rf feeds/luci/applications/luci-app-passwall2
 rm -rf feeds/luci/applications/luci-app-openclash
 rm -rf feeds/luci/applications/luci-app-lucky
+rm -rf feeds/luci/themes/luci-theme-argon
 rm -rf feeds/packages/net/chinadns-ng
 rm -rf feeds/packages/net/geoview
 rm -rf feeds/packages/net/sing-box
 rm -rf feeds/packages/net/xray-core
 rm -rf feeds/packages/net/lucky
 rm -rf feeds/packages/utils/coremark
-rm -rf feeds/packages/net/ksmbd
 
-
-#git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git luci-theme-argon
-#git clone -b 18.06 https://github.com/jerrykuku/luci-app-argon-config.git luci-app-argon-config
-
-# ==============================================
-#!/bin/bash
-
-# ========== 1. 彻底删除 Lean 自带 Argon ==========
-rm -rf feeds/luci/themes/luci-theme-argon
-rm -rf feeds/luci/applications/luci-app-argon-config
-rm -rf package/lean/luci-theme-argon
-rm -rf package/lean/luci-app-argon-config
-rm -rf package/luci-theme-argon
-rm -rf package/luci-app-argon-config
-./scripts/feeds uninstall luci-theme-argon
-./scripts/feeds uninstall luci-app-argon-config
-
-# ========== 2. 安装你的 Argon 主题（你自己的仓库） ==========
-git clone --depth=1 -b 18.06 https://github.com/hza81007155/luci-theme-argon.git package/luci-theme-argon
-git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-app-argon-config.git package/luci-app-argon-config
-
-# ========== 5. 更新依赖 ==========
-./scripts/feeds update -a
-./scripts/feeds install -a
+# 设置默认主题
+sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-light/Makefile
 
 # x86 型号只显示 CPU 型号
 sed -i 's/${g}.*/${a}${b}${c}${d}${e}${f}${hydrid}/g' package/lean/autocore/files/x86/autocore
@@ -73,13 +51,17 @@ function git_sparse_clone() {
 
 # 添加插件
 git_sparse_clone openwrt-24.10 https://github.com/openwrt/packages utils/coremark
+git clone -b 18.06 https://github.com/hza81007155/luci-theme-argon.git luci-theme-argon
+git clone -b 18.06 https://github.com/hza81007155/luci-app-argon-config.git luci-app-argon-config
 
+# cpufreq
+git clone --depth=1 --single-branch https://github.com/hza81007155/luci-app-cpufreq.git
 
 # istore
+#git clone --depth=1 -b main https://github.com/linkease/nas-packages-luci package/nas-packages-luci
+#git clone --depth=1 -b master https://github.com/linkease/nas-packages package/nas-packages
+#git clone --depth=1 -b main https://github.com/linkease/istore package/istore
 git clone https://github.com/linkease/istore-ui.git package/istore/istore-ui
 git clone https://github.com/linkease/istore.git package/istore/istore
 git clone https://github.com/linkease/nas-packages.git package/nas
 git clone https://github.com/linkease/nas-packages-luci.git package/luci-app-nas
-
-# 设置默认主题
-sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-light/Makefile
