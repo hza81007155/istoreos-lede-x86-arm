@@ -42,29 +42,12 @@ rm -rf package/lean/luci-theme-argon
 rm -rf package/lean/luci-app-argon-config
 rm -rf package/luci-theme-argon
 rm -rf package/luci-app-argon-config
-
 ./scripts/feeds uninstall luci-theme-argon
 ./scripts/feeds uninstall luci-app-argon-config
 
 # ========== 2. 安装你的 Argon 主题（你自己的仓库） ==========
 git clone --depth=1 -b 18.06 https://github.com/hza81007155/luci-theme-argon.git package/luci-theme-argon
 git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-app-argon-config.git package/luci-app-argon-config
-
-# ========== 3. 安装 PassWall 全套 ==========
-git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages package/openwrt-passwall
-git clone --depth=1 -b main https://github.com/Openwrt-Passwall/openwrt-passwall package/luci-app-passwall
-
-# ========== 4. 自动写入配置 ==========
-cat >> .config << EOF
-CONFIG_PACKAGE_luci-theme-argon=y
-CONFIG_PACKAGE_luci-app-argon-config=y
-CONFIG_PACKAGE_luci-app-passwall=y
-CONFIG_PACKAGE_passwall=y
-CONFIG_PACKAGE_v2ray-core=y
-CONFIG_PACKAGE_v2ray-geoip=y
-CONFIG_PACKAGE_v2ray-geosite=y
-CONFIG_PACKAGE_sing-box=y
-EOF
 
 # ========== 5. 更新依赖 ==========
 ./scripts/feeds update -a
