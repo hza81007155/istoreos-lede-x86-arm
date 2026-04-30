@@ -51,7 +51,8 @@ function git_sparse_clone() {
 
 # 添加插件
 git_sparse_clone openwrt-24.10 https://github.com/openwrt/packages utils/coremark
-git clone -b 18.06 https://github.com/hza81007155/luci-theme-argon.git luci-theme-argon
+git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git luci-theme-argon
+#git clone -b 18.06 https://github.com/hza81007155/luci-theme-argon.git luci-theme-argon
 git clone -b 18.06 https://github.com/hza81007155/luci-app-argon-config.git luci-app-argon-config
 
 # cpufreq
