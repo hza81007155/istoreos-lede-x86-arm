@@ -47,10 +47,10 @@ rm -rf package/luci-app-argon-config
 # ==============================================
 # 拉取 【你自己的 Argon 主题】
 # ==============================================
-git clone --depth=1 -b 18.06 https://github.com/hza81007155/luci-theme-argon.git package/luci-theme-argon
+git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git luci-theme-argon
 
 # 拉取配套设置插件（原版）
-git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config.git package/luci-app-argon-config
+git clone -b 18.06 https://github.com/jerrykuku/luci-app-argon-config.git luci-app-argon-config
 
 # ==============================================
 # 更新依赖（必须）
