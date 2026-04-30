@@ -28,11 +28,14 @@ rm -rf feeds/packages/net/lucky
 rm -rf feeds/packages/utils/coremark
 rm -rf feeds/packages/net/ksmbd
 
-#!/bin/bash
+
+#git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git luci-theme-argon
+#git clone -b 18.06 https://github.com/jerrykuku/luci-app-argon-config.git luci-app-argon-config
 
 # ==============================================
-# 【LEDE 专用】删除 Lean 源码自带的 Argon 主题
-# ==============================================
+#!/bin/bash
+
+# ========== 1. 彻底删除 Lean 自带 Argon ==========
 rm -rf feeds/luci/themes/luci-theme-argon
 rm -rf feeds/luci/applications/luci-app-argon-config
 rm -rf package/lean/luci-theme-argon
@@ -40,21 +43,30 @@ rm -rf package/lean/luci-app-argon-config
 rm -rf package/luci-theme-argon
 rm -rf package/luci-app-argon-config
 
-# 从 feeds 彻底卸载
 ./scripts/feeds uninstall luci-theme-argon
 ./scripts/feeds uninstall luci-app-argon-config
 
-# ==============================================
-# 拉取 【你自己的 Argon 主题】
-# ==============================================
-git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git luci-theme-argon
+# ========== 2. 安装你的 Argon 主题（你自己的仓库） ==========
+git clone --depth=1 -b 18.06 https://github.com/hza81007155/luci-theme-argon.git package/luci-theme-argon
+git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-app-argon-config.git package/luci-app-argon-config
 
-# 拉取配套设置插件（原版）
-git clone -b 18.06 https://github.com/jerrykuku/luci-app-argon-config.git luci-app-argon-config
+# ========== 3. 安装 PassWall 全套 ==========
+git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages package/openwrt-passwall
+git clone --depth=1 -b main https://github.com/Openwrt-Passwall/openwrt-passwall package/luci-app-passwall
 
-# ==============================================
-# 更新依赖（必须）
-# ==============================================
+# ========== 4. 自动写入配置 ==========
+cat >> .config << EOF
+CONFIG_PACKAGE_luci-theme-argon=y
+CONFIG_PACKAGE_luci-app-argon-config=y
+CONFIG_PACKAGE_luci-app-passwall=y
+CONFIG_PACKAGE_passwall=y
+CONFIG_PACKAGE_v2ray-core=y
+CONFIG_PACKAGE_v2ray-geoip=y
+CONFIG_PACKAGE_v2ray-geosite=y
+CONFIG_PACKAGE_sing-box=y
+EOF
+
+# ========== 5. 更新依赖 ==========
 ./scripts/feeds update -a
 ./scripts/feeds install -a
 
@@ -78,9 +90,7 @@ function git_sparse_clone() {
 
 # 添加插件
 git_sparse_clone openwrt-24.10 https://github.com/openwrt/packages utils/coremark
-git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages package/openwrt-passwall
-git clone --depth=1 -b main https://github.com/Openwrt-Passwall/openwrt-passwall package/luci-app-passwall
-git clone --depth=1 -b main https://github.com/Openwrt-Passwall/openwrt-passwall2 package/openwrt-passwall2
+
 
 # istore
 git clone https://github.com/linkease/istore-ui.git package/istore/istore-ui
