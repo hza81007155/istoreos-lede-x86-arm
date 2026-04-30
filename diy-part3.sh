@@ -20,7 +20,6 @@ rm -rf feeds/luci/applications/luci-app-passwall
 rm -rf feeds/luci/applications/luci-app-passwall2
 rm -rf feeds/luci/applications/luci-app-openclash
 rm -rf feeds/luci/applications/luci-app-lucky
-rm -rf feeds/luci/themes/luci-theme-argon
 rm -rf feeds/packages/net/chinadns-ng
 rm -rf feeds/packages/net/geoview
 rm -rf feeds/packages/net/sing-box
@@ -28,6 +27,36 @@ rm -rf feeds/packages/net/xray-core
 rm -rf feeds/packages/net/lucky
 rm -rf feeds/packages/utils/coremark
 rm -rf feeds/packages/net/ksmbd
+
+#!/bin/bash
+
+# ==============================================
+# 【LEDE 专用】删除 Lean 源码自带的 Argon 主题
+# ==============================================
+rm -rf feeds/luci/themes/luci-theme-argon
+rm -rf feeds/luci/applications/luci-app-argon-config
+rm -rf package/lean/luci-theme-argon
+rm -rf package/lean/luci-app-argon-config
+rm -rf package/luci-theme-argon
+rm -rf package/luci-app-argon-config
+
+# 从 feeds 彻底卸载
+./scripts/feeds uninstall luci-theme-argon
+./scripts/feeds uninstall luci-app-argon-config
+
+# ==============================================
+# 拉取 【你自己的 Argon 主题】
+# ==============================================
+git clone --depth=1 -b 18.06 https://github.com/hza81007155/luci-theme-argon.git package/luci-theme-argon
+
+# 拉取配套设置插件（原版）
+git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config.git package/luci-app-argon-config
+
+# ==============================================
+# 更新依赖（必须）
+# ==============================================
+./scripts/feeds update -a
+./scripts/feeds install -a
 
 # x86 型号只显示 CPU 型号
 sed -i 's/${g}.*/${a}${b}${c}${d}${e}${f}${hydrid}/g' package/lean/autocore/files/x86/autocore
@@ -61,7 +90,3 @@ git clone https://github.com/linkease/nas-packages-luci.git package/luci-app-nas
 
 # 设置默认主题
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-light/Makefile
-
-# Argone theme
-git clone -b 18.06 https://github.com/hza81007155/luci-theme-argon.git luci-theme-argon
-git clone -b 18.06 https://github.com/hza81007155/luci-app-argon-config.git luci-app-argon-config
